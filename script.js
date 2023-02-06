@@ -91,3 +91,4 @@ resetBtn.addEventListener("click", () => {
   // text.innerText = "How is your memory?";
   cards.forEach((card) => card.addEventListener("click", flip));
 });
+(shuffle())()
