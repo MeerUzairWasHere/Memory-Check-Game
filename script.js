@@ -1,10 +1,12 @@
 const cards = document.querySelectorAll(".card");
 const resetBtn = document.querySelector(".resetGame");
+const text = document.getElementById("text");
 
 //variables
 var isFlipped = false;
 var firstCard;
 var secondCard;
+var isRevealed = 0;
 
 cards.forEach((card) => card.addEventListener("click", flip));
 
@@ -34,9 +36,30 @@ function checkIt() {
 }
 
 function success() {
-  //   console.log("Success");
+  // console.log("Success");
   firstCard.removeEventListener("click", flip);
   secondCard.removeEventListener("click", flip);
+  isRevealed += 1;
+  console.log(isRevealed);
+  if (isRevealed === 8) {
+    text.innerHTML = "YOU WON! 🙌🎉";
+    // test
+    setTimeout(() => {
+      cards.forEach((card) => card.classList.remove("flip"));
+      shuffle();
+      text.innerText = "How is your memory?";
+      cards.forEach((card) => card.addEventListener("click", flip));
+      isRevealed = 0
+
+    }, 3000);
+    // text.innerHTML = "YOU WON! 🙌🎉"
+    // // test
+    // cards.forEach((card) => card.classList.remove("flip"));
+    // shuffle();
+    // cards.forEach((card) => card.addEventListener("click", flip));
+
+    // test
+  }
   reset();
 }
 
@@ -65,5 +88,6 @@ function shuffle() {
 resetBtn.addEventListener("click", () => {
   cards.forEach((card) => card.classList.remove("flip"));
   shuffle();
+  // text.innerText = "How is your memory?";
   cards.forEach((card) => card.addEventListener("click", flip));
 });
